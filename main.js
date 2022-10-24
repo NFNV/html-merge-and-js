@@ -1,7 +1,5 @@
-//picking up navbar email
+//picking up/importing navbar email, desktop menu, ham icon, cart icon & product detail
 const menuEmail = document.querySelector(".navbar-email")
-
-//picking up desktop menu
 const desktopMenu = document.querySelector(".desktop-menu")
 const menuHamIcon = document.querySelector(".menu")
 const mobileMenu = document.querySelector(".mobile-menu")
@@ -34,12 +32,17 @@ const toggleMobileMenu = () => {
 
 menuHamIcon.addEventListener("click", toggleMobileMenu)
 
-//each time we click on cart(aside), mobile menu will close
+//each time we click on cart(aside), mobile menu & desktop menu will close
 const toggleCartMenu = () => {
     const isMobileMenuClosed = mobileMenu.classList.contains("inactive")
+    const isDesktopMenuClosed = desktopMenu.classList.contains("inactive")
 
     if (!isMobileMenuClosed) {
         mobileMenu.classList.add("inactive")
+    }
+
+    if (!isDesktopMenuClosed) {
+        desktopMenu.classList.add("inactive")
     }
 
     aside.classList.toggle("inactive")
