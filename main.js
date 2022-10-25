@@ -52,6 +52,7 @@ const toggleCartMenu = () => {
 menuCartIcon.addEventListener("click", toggleCartMenu)
 
 //products will be hardcoded here
+//array of objects, products inside
 const productList = []
 productList.push({
   name: "Bike",
@@ -71,53 +72,45 @@ productList.push({
   image: "https://cryptoavisos.com/oc-content/uploads/75/29883.webp",
 })
 
-for (const product of productList) {
-  const productCard = document.createElement("div")
-  productCard.classList.add("product-card")
-  
-  const productImg = document.createElement("img")
-  productImg.setAttribute("src", product.image)
-  
-  const productInfo = document.createElement("div")
-  productInfo.classList.add("product-info")
-  
-  const productInfoDiv = document.createElement("div")
-  const productPrice = document.createElement("p")
-  productPrice.innerText = `€${product.price}`
-  const productName = document.createElement("p")
-  productName.innerText = product.name
-  
-  const productInfoFigure = document.createElement("figure")
-  const productImgCart = document.createElement("img")
-  productImgCart.setAttribute("src", "./icons/bt_add_to_cart.svg")
-  
-  productCard.appendChild(productImg)
-  productCard.appendChild(productInfo)
+//for of within a function
+const renderProducts = (arr) => {
+  //iterating & creating elements
+  for (const product of arr) {
+    // creating a div
+    const productCard = document.createElement("div")
+    // adding "product-card" to that div's class
+    productCard.classList.add("product-card")
+    //creating img element
+    const productImg = document.createElement("img")
+    //adding source
+    productImg.setAttribute("src", product.image)
+    //repeat
+    const productInfo = document.createElement("div")
+    productInfo.classList.add("product-info")
 
-  productInfo.appendChild(productInfoDiv)
-  productInfo.appendChild(productInfoFigure)
+    const productInfoDiv = document.createElement("div")
+    const productPrice = document.createElement("p")
+    productPrice.innerText = `€${product.price}`
+    const productName = document.createElement("p")
+    productName.innerText = product.name
 
-  productInfoDiv.appendChild(productPrice)
-  productInfoDiv.appendChild(productName)
+    const productInfoFigure = document.createElement("figure")
+    const productImgCart = document.createElement("img")
+    productImgCart.setAttribute("src", "./icons/bt_add_to_cart.svg")
+    //father & children nodes
+    productCard.appendChild(productImg)
+    productCard.appendChild(productInfo)
 
-  productInfoFigure.appendChild(productImgCart)
+    productInfo.appendChild(productInfoDiv)
+    productInfo.appendChild(productInfoFigure)
 
-  cardsContainer.appendChild(productCard)
+    productInfoDiv.appendChild(productPrice)
+    productInfoDiv.appendChild(productName)
+
+    productInfoFigure.appendChild(productImgCart)
+
+    cardsContainer.appendChild(productCard)
+  }
 }
-
-{
-  /* 
-  <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <div class="product-info">
-            <div>
-            <p>$120,00</p>
-            <p>Bike</p>
-            </div>
-            <figure>
-            <img src="./icons/bt_add_to_cart.svg" alt="">
-            </figure>
-        </div>
-  </div> 
-  */
-}
+//call the function
+renderProducts(productList)
