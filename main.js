@@ -4,16 +4,16 @@ const desktopMenu = document.querySelector(".desktop-menu")
 const menuHamIcon = document.querySelector(".menu")
 const mobileMenu = document.querySelector(".mobile-menu")
 const menuCartIcon = document.querySelector(".navbar-shopping-cart")
-const aside = document.querySelector(".product-detail")
+const shoppingCartContainer = document.querySelector("#shoppingCartContainer")
 const cardsContainer = document.querySelector(".cards-container")
 
 //toggling visible/invisible the "inactive" class
 //each time we click on desktop menu, cart(aside) will close
 const toggleDesktopMenu = () => {
-  const isAsideClosed = aside.classList.contains("inactive")
+  const isShoppingCartContainerClosed = shoppingCartContainer.classList.contains("inactive")
 
-  if (!isAsideClosed) {
-    aside.classList.add("inactive")
+  if (!isShoppingCartContainerClosed) {
+    shoppingCartContainer.classList.add("inactive")
   }
   desktopMenu.classList.toggle("inactive")
 }
@@ -22,10 +22,10 @@ menuEmail.addEventListener("click", toggleDesktopMenu)
 
 //each time we click on mobile menu, cart(aside) will close
 const toggleMobileMenu = () => {
-  const isAsideClosed = aside.classList.contains("inactive")
+  const isShoppingCartContainerClosed = shoppingCartContainer.classList.contains("inactive")
 
-  if (!isAsideClosed) {
-    aside.classList.add("inactive")
+  if (!isShoppingCartContainerClosed) {
+    shoppingCartContainer.classList.add("inactive")
   }
 
   mobileMenu.classList.toggle("inactive")
@@ -33,7 +33,7 @@ const toggleMobileMenu = () => {
 
 menuHamIcon.addEventListener("click", toggleMobileMenu)
 
-//each time we click on cart(aside), mobile menu & desktop menu will close
+//each time we click on cart(shoppingCartContainer), mobile menu & desktop menu will close
 const toggleCartMenu = () => {
   const isMobileMenuClosed = mobileMenu.classList.contains("inactive")
   const isDesktopMenuClosed = desktopMenu.classList.contains("inactive")
@@ -46,7 +46,7 @@ const toggleCartMenu = () => {
     desktopMenu.classList.add("inactive")
   }
 
-  aside.classList.toggle("inactive")
+  shoppingCartContainer.classList.toggle("inactive")
 }
 
 menuCartIcon.addEventListener("click", toggleCartMenu)
