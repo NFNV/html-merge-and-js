@@ -1,51 +1,123 @@
-//picking up/importing navbar email, desktop menu, ham icon, cart icon & product detail
+//picking up/importing navbar email, desktop menu, ham icon, cart icon, product detail & cards container
 const menuEmail = document.querySelector(".navbar-email")
 const desktopMenu = document.querySelector(".desktop-menu")
 const menuHamIcon = document.querySelector(".menu")
 const mobileMenu = document.querySelector(".mobile-menu")
 const menuCartIcon = document.querySelector(".navbar-shopping-cart")
 const aside = document.querySelector(".product-detail")
+const cardsContainer = document.querySelector(".cards-container")
 
 //toggling visible/invisible the "inactive" class
 //each time we click on desktop menu, cart(aside) will close
 const toggleDesktopMenu = () => {
-    const isAsideClosed = aside.classList.contains("inactive")
+  const isAsideClosed = aside.classList.contains("inactive")
 
-    if (!isAsideClosed) {
-        aside.classList.add("inactive")
-    }
-    desktopMenu.classList.toggle("inactive")
+  if (!isAsideClosed) {
+    aside.classList.add("inactive")
+  }
+  desktopMenu.classList.toggle("inactive")
 }
 //when the click event on menuEmail ('.navbar-email') occurs, execute toggleDesktopMenu function
 menuEmail.addEventListener("click", toggleDesktopMenu)
 
 //each time we click on mobile menu, cart(aside) will close
 const toggleMobileMenu = () => {
-    const isAsideClosed = aside.classList.contains("inactive")
+  const isAsideClosed = aside.classList.contains("inactive")
 
-    if (!isAsideClosed) {
-        aside.classList.add("inactive")
-    }
+  if (!isAsideClosed) {
+    aside.classList.add("inactive")
+  }
 
-    mobileMenu.classList.toggle("inactive")
+  mobileMenu.classList.toggle("inactive")
 }
 
 menuHamIcon.addEventListener("click", toggleMobileMenu)
 
 //each time we click on cart(aside), mobile menu & desktop menu will close
 const toggleCartMenu = () => {
-    const isMobileMenuClosed = mobileMenu.classList.contains("inactive")
-    const isDesktopMenuClosed = desktopMenu.classList.contains("inactive")
+  const isMobileMenuClosed = mobileMenu.classList.contains("inactive")
+  const isDesktopMenuClosed = desktopMenu.classList.contains("inactive")
 
-    if (!isMobileMenuClosed) {
-        mobileMenu.classList.add("inactive")
-    }
+  if (!isMobileMenuClosed) {
+    mobileMenu.classList.add("inactive")
+  }
 
-    if (!isDesktopMenuClosed) {
-        desktopMenu.classList.add("inactive")
-    }
+  if (!isDesktopMenuClosed) {
+    desktopMenu.classList.add("inactive")
+  }
 
-    aside.classList.toggle("inactive")
+  aside.classList.toggle("inactive")
 }
 
 menuCartIcon.addEventListener("click", toggleCartMenu)
+
+//products will be hardcoded here
+const productList = []
+productList.push({
+  name: "Bike",
+  price: 120,
+  image:
+    "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+})
+productList.push({
+  name: "Monitor",
+  price: 500,
+  image:
+    "https://static-geektopia.com/storage/t/i/673/67352/aw2720hf_front-view_678_6.webp",
+})
+productList.push({
+  name: "Laptop",
+  price: 1000,
+  image: "https://cryptoavisos.com/oc-content/uploads/75/29883.webp",
+})
+
+for (const product of productList) {
+  const productCard = document.createElement("div")
+  productCard.classList.add("product-card")
+  
+  const productImg = document.createElement("img")
+  productImg.setAttribute("src", product.image)
+  
+  const productInfo = document.createElement("div")
+  productInfo.classList.add("product-info")
+  
+  const productInfoDiv = document.createElement("div")
+  const productPrice = document.createElement("p")
+  productPrice.innerText = `€${product.price}`
+  const productName = document.createElement("p")
+  productName.innerText = product.name
+  
+  const productInfoFigure = document.createElement("figure")
+  const productImgCart = document.createElement("img")
+  productImgCart.setAttribute("src", "./icons/bt_add_to_cart.svg")
+  
+  productCard.appendChild(productImg)
+  productCard.appendChild(productInfo)
+
+  productInfo.appendChild(productInfoDiv)
+  productInfo.appendChild(productInfoFigure)
+
+  productInfoDiv.appendChild(productPrice)
+  productInfoDiv.appendChild(productName)
+
+  productInfoFigure.appendChild(productImgCart)
+
+  cardsContainer.appendChild(productCard)
+}
+
+{
+  /* 
+  <div class="product-card">
+        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <div class="product-info">
+            <div>
+            <p>$120,00</p>
+            <p>Bike</p>
+            </div>
+            <figure>
+            <img src="./icons/bt_add_to_cart.svg" alt="">
+            </figure>
+        </div>
+  </div> 
+  */
+}
