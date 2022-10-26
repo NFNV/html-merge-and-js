@@ -1,4 +1,4 @@
-//picking up/importing navbar email, desktop menu, ham icon, cart icon, product detail & cards container
+//picking up/importing navbar email, desktop menu, ham icon, cart icon, product detail & cards container & shopping cart container
 const menuEmail = document.querySelector(".navbar-email")
 const desktopMenu = document.querySelector(".desktop-menu")
 const menuHamIcon = document.querySelector(".menu")
@@ -29,7 +29,7 @@ const toggleDesktopMenu = () => {
 //when the click event on menuEmail ('.navbar-email') occurs, execute toggleDesktopMenu function
 menuEmail.addEventListener("click", toggleDesktopMenu)
 
-//each time we click on mobile menu, cart(aside) will close
+//each time we click on mobile menu, cart(aside) & shopping cart container will close
 const toggleMobileMenu = () => {
   const isShoppingCartContainerClosed =
     shoppingCartContainer.classList.contains("inactive")
@@ -49,7 +49,7 @@ const toggleMobileMenu = () => {
 
 menuHamIcon.addEventListener("click", toggleMobileMenu)
 
-//each time we click on cart(shoppingCartContainer), mobile menu & desktop menu will close
+//each time we click on cart(shoppingCartContainer), mobile menu, cart(aside) & desktop menu will close
 const toggleCartMenu = () => {
   const isMobileMenuClosed = mobileMenu.classList.contains("inactive")
   const isDesktopMenuClosed = desktopMenu.classList.contains("inactive")
@@ -77,6 +77,7 @@ const openProductDetailAside = () => {
 
 menuCartIcon.addEventListener("click", toggleCartMenu)
 
+//each time we click on product detail close icon, mobile menu, cart(aside) & desktop menu will close
 const closeProductDetailAside = () => {
   const isDesktopMenuClosed = desktopMenu.classList.contains("inactive")
   const isShoppingCartContainerClosed =
@@ -159,5 +160,3 @@ const renderProducts = (arr) => {
 }
 //call the function
 renderProducts(productList)
-
-//shoppingCartContainer and desktopMenu should close when productDetailAside opens
