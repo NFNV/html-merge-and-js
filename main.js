@@ -6,14 +6,23 @@ const mobileMenu = document.querySelector(".mobile-menu")
 const menuCartIcon = document.querySelector(".navbar-shopping-cart")
 const shoppingCartContainer = document.querySelector("#shoppingCartContainer")
 const cardsContainer = document.querySelector(".cards-container")
+const productDetailAside = document.querySelector("#productDetail")
+const productDetailCloseIcon = document.querySelector(".product-detail-close")
 
 //toggling visible/invisible the "inactive" class
 //each time we click on desktop menu, cart(aside) will close
 const toggleDesktopMenu = () => {
-  const isShoppingCartContainerClosed = shoppingCartContainer.classList.contains("inactive")
+  const isShoppingCartContainerClosed =
+    shoppingCartContainer.classList.contains("inactive")
+  const isProductDetailAsideClosed =
+    productDetailAside.classList.contains("inactive")
 
   if (!isShoppingCartContainerClosed) {
     shoppingCartContainer.classList.add("inactive")
+  }
+
+  if (!isProductDetailAsideClosed) {
+    productDetailAside.classList.add("inactive")
   }
   desktopMenu.classList.toggle("inactive")
 }
@@ -22,10 +31,17 @@ menuEmail.addEventListener("click", toggleDesktopMenu)
 
 //each time we click on mobile menu, cart(aside) will close
 const toggleMobileMenu = () => {
-  const isShoppingCartContainerClosed = shoppingCartContainer.classList.contains("inactive")
+  const isShoppingCartContainerClosed =
+    shoppingCartContainer.classList.contains("inactive")
+  const isProductDetailAsideClosed =
+    productDetailAside.classList.contains("inactive")
 
   if (!isShoppingCartContainerClosed) {
     shoppingCartContainer.classList.add("inactive")
+  }
+
+  if (!isProductDetailAsideClosed) {
+    productDetailAside.classList.add("inactive")
   }
 
   mobileMenu.classList.toggle("inactive")
@@ -37,6 +53,8 @@ menuHamIcon.addEventListener("click", toggleMobileMenu)
 const toggleCartMenu = () => {
   const isMobileMenuClosed = mobileMenu.classList.contains("inactive")
   const isDesktopMenuClosed = desktopMenu.classList.contains("inactive")
+  const isProductDetailAsideClosed =
+    productDetailAside.classList.contains("inactive")
 
   if (!isMobileMenuClosed) {
     mobileMenu.classList.add("inactive")
@@ -46,10 +64,36 @@ const toggleCartMenu = () => {
     desktopMenu.classList.add("inactive")
   }
 
+  if (!isProductDetailAsideClosed) {
+    productDetailAside.classList.add("inactive")
+  }
+
   shoppingCartContainer.classList.toggle("inactive")
 }
 
+const openProductDetailAside = () => {
+  productDetailAside.classList.remove("inactive")
+}
+
 menuCartIcon.addEventListener("click", toggleCartMenu)
+
+const closeProductDetailAside = () => {
+  const isDesktopMenuClosed = desktopMenu.classList.contains("inactive")
+  const isShoppingCartContainerClosed =
+    shoppingCartContainer.classList.contains("inactive")
+
+  if (!isDesktopMenuClosed) {
+    desktopMenu.classList.add("inactive")
+  }
+
+  if (!isShoppingCartContainerClosed) {
+    shoppingCartContainer.classList.add("inactive")
+  }
+
+  productDetailAside.classList.add("inactive")
+}
+
+productDetailCloseIcon.addEventListener("click", closeProductDetailAside)
 
 //products will be hardcoded here
 //array of objects, products inside
@@ -84,6 +128,7 @@ const renderProducts = (arr) => {
     const productImg = document.createElement("img")
     //adding source
     productImg.setAttribute("src", product.image)
+    productImg.addEventListener("click", openProductDetailAside)
     //repeat
     const productInfo = document.createElement("div")
     productInfo.classList.add("product-info")
@@ -114,3 +159,5 @@ const renderProducts = (arr) => {
 }
 //call the function
 renderProducts(productList)
+
+//shoppingCartContainer and desktopMenu should close when productDetailAside opens
